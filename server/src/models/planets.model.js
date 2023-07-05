@@ -47,4 +47,5 @@ function loadPlanetsData() {
       });
   });
 }
+
 module.exports = { planets: habitablePlanets, loadPlanetsData };

@@ -1,0 +1,27 @@
+{
+  "name": "nasa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd server && npm install",
+    "install-client": "cd client && npm install",
+    "install": "npm run install-server && npm run install-client",
+    "server": "npm run watch --prefix server",
+    "client": "npm start --prefix server",
+    "watch": "npm run server & npm run client",
+    "deploy": "npm run build --prefix client && npm run start --prefix server",
+    "test": "npm run test --prefix server && npm run test --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marijanasevo/nasa-fullstack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marijanasevo/nasa-fullstack/issues"
+  },
+  "homepage": "https://github.com/marijanasevo/nasa-fullstack#readme"
+}
