@@ -8,8 +8,8 @@
     "install-client": "cd client && npm install",
     "install": "npm run install-server && npm run install-client",
     "server": "npm run watch --prefix server",
-    "client": "npm start --prefix server",
-    "watch": "npm run server & npm run client",
+    "client": "npm start --prefix client",
+    "watch": "concurrently \"npm run server\" \"npm run client\"",
     "deploy": "npm run build --prefix client && npm run start --prefix server",
     "test": "npm run test --prefix server && npm run test --prefix client"
   },
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/marijanasevo/nasa-fullstack/issues"
   },
-  "homepage": "https://github.com/marijanasevo/nasa-fullstack#readme"
+  "homepage": "https://github.com/marijanasevo/nasa-fullstack#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
 }
