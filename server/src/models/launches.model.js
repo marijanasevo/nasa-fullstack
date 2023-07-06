@@ -46,4 +46,21 @@ function addNewLaunch(launch) {
   return launches.get(latestFlightNumber);
 }
 
-module.exports = { getAllLaunches, addNewLaunch };
+function abortLaunch(id) {
+  const launch = launches.get(id);
+  launch.success = false;
+  launch.upcoming = false;
+
+  return launch;
+}
+
+function existsLaunchById(id) {
+  return launches.get(id);
+}
+
+module.exports = {
+  getAllLaunches,
+  addNewLaunch,
+  abortLaunch,
+  existsLaunchById,
+};
