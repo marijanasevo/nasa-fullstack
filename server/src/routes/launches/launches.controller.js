@@ -1,15 +1,15 @@
 const {
   getAllLaunches,
-  addNewLaunch,
+  scheduleNewLaunch,
   abortLaunch,
   existsLaunchById,
 } = require('../../models/launches.model');
 
-function httpGetAllLaunches(req, res) {
-  return res.status(200).json(getAllLaunches());
+async function httpGetAllLaunches(req, res) {
+  return res.status(200).json(await getAllLaunches());
 }
 
-function httpPostLaunch(req, res) {
+async function httpPostLaunch(req, res) {
   const launch = req.body;
   if (
     !launch.mission ||
@@ -26,20 +26,24 @@ function httpPostLaunch(req, res) {
     res.status(400).json({ error: 'Invalid launch date' });
   }
 
-  const result = addNewLaunch(req.body);
+  const result = await scheduleNewLaunch(req.body);
+  console.log(result);
   return res.status(201).json(result);
 }
 
-function httpDeleteLaunch(req, res) {
+async function httpDeleteLaunch(req, res) {
   const launchId = Number(req.params.id);
+  const existsLaunch = await existsLaunchById(launchId);
 
-  if (!existsLaunchById(launchId)) {
+  if (!existsLaunch) {
     return res.status(404).json({ error: 'No launch with id ' + launchId });
   }
 
-  const abortedLaunch = abortLaunch(launchId);
+  const aborted = await abortLaunch(launchId);
 
-  return res.status(200).json(abortedLaunch);
+  if (!aborted) return res.status(404).json({ error: 'Something went wrong' });
+
+  return res.status(200).json({ ok: aborted });
 }
 
 module.exports = { httpGetAllLaunches, httpPostLaunch, httpDeleteLaunch };
