@@ -23,11 +23,10 @@ async function httpPostLaunch(req, res) {
   launch.launchDate = new Date(launch.launchDate);
 
   if (launch.launchDate.toString() === 'Invalid Date') {
-    res.status(400).json({ error: 'Invalid launch date' });
+    return res.status(400).json({ error: 'Invalid launch date' });
   }
 
   const result = await scheduleNewLaunch(req.body);
-  console.log(result);
   return res.status(201).json(result);
 }
 

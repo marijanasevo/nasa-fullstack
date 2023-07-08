@@ -11,7 +11,6 @@ async function httpGetPlanets() {
 async function httpGetLaunches() {
   const response = await fetch(API_URL + '/launches');
   const launches = await response.json();
-  console.log(launches);
   return launches.sort(
     (launchA, launchB) => launchA.flightNumber - launchB.flightNumber
   );
