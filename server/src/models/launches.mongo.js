@@ -25,7 +25,6 @@ const launchesSchema = new mongoose.Schema({
     // type: mongoose.Schema.Types.ObjectId,
     // ref: 'Planet'
     type: String,
-    required: true,
   },
   customers: {
     type: Array,
